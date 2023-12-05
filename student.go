@@ -63,25 +63,30 @@ func (r *StudentList) Clean() {
 // WhateverToString returns what as a string
 // only works on intigers and numbers and stuff
 func WhateverToString(what interface{}) string {
-	return fmt.Sprintf("%v", what)
+	s, ok := what.(string)
+	if !ok {
+		return fmt.Sprintf("%v", what)
+	}
+
+	return fmt.Sprintf("%s", s)
 }
 
 // ToCSVSlice will turn the student in a CSV element!
 func (s *Student) ToCSVSlice() []string {
 	return []string{
 		WhateverToString(s.UserID),
-		s.Nickname,
-		s.FirstName,
-		s.LastName,
-		s.Email,
-		s.GradeDisplay,
-		s.AddressLine1,
+		WhateverToString(s.Nickname),
+		WhateverToString(s.FirstName),
+		WhateverToString(s.LastName),
+		WhateverToString(s.Email),
+		WhateverToString(s.GradeDisplay),
+		WhateverToString(s.AddressLine1),
 		WhateverToString(s.PreferredAddressLat),
 		WhateverToString(s.PreferredAddressLng),
-		s.City,
-		s.State,
-		s.Zip,
-		s.HomePhone,
+		WhateverToString(s.City),
+		WhateverToString(s.State),
+		WhateverToString(s.Zip),
+		WhateverToString(s.HomePhone),
 	}
 }
 
